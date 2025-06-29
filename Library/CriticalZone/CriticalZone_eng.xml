@@ -1,0 +1,12 @@
+<Element>
+    <!-- GENERAL-->
+    <Item>
+        <TextId>10000</TextId>
+        <Text>Critical Zone</Text>
+    </Item>
+
+    <Item>
+        <TextId>1000</TextId>
+		<Text>Path of Downloaded File</Text>
+    </Item>
+</Element>
