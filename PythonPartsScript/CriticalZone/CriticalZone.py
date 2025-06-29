@@ -1,6 +1,7 @@
 
 import re
 from typing import Any
+import uuid
 
 import NemAll_Python_BaseElements as AllplanBaseElements
 import NemAll_Python_BasisElements as AllplanBasisElements
@@ -65,12 +66,13 @@ class CriticalZone(BaseInteractor):
         self.modify_uuid_list = interactor_data.modify_uuid_list
         self.control_props_list  = interactor_data.control_props_list
         self.build_ele_list = interactor_data.build_ele_list
+        self.build_ele_list[0].UUID_STRING.value  = str(uuid.uuid4())
         self.build_ele = self.build_ele_list[0]
         self.doc = self.coord_input.GetInputViewDocument()
 
         # Get string table
         self.str_table = self.build_ele.get_string_tables()[0]
-         
+
         self.ctrl_prop_util = ControlPropertiesUtil(self.control_props_list, self.build_ele_list)
         self.post_element_selection = AllplanIFW.PostElementSelection()
 
@@ -139,7 +141,7 @@ class CriticalZone(BaseInteractor):
             return True
 
         if self.build_ele.CriticalZoneType.value == CriticalZoneType.Column.value:
-           
+
             if not self.column_selected :
                 self.column_mouse(mouse_msg, pnt, msg_info)
                 print("Column: ", self.column)
@@ -202,7 +204,7 @@ class CriticalZone(BaseInteractor):
 
         self.palette_service.close_palette()
         return True
-    
+
     def column_mouse(self, mouse_msg, pnt, msg_info):
         """
         Process the mouse message event for column only
@@ -224,7 +226,7 @@ class CriticalZone(BaseInteractor):
         self.column_selected = True
 
         return True
-    
+
     def slab_mouse(self, mouse_msg, pnt, msg_info):
         """
         Process the mouse message event for column only
@@ -249,7 +251,7 @@ class CriticalZone(BaseInteractor):
         self.slab_selected = True
 
         return True
-    
+
     def selection_wall_erea(self, display_text: str):
         """Turn on area selection mode
 
@@ -285,7 +287,7 @@ class CriticalZone(BaseInteractor):
         self.wall_end = self.coord_input.GetSelectedElement() if not self.coord_input.GetSelectedElement().IsNull() else None
 
         return True
-    
+
     def wall_straight_mouse(self, mouse_msg, pnt, msg_info):
         """
         Process the mouse message event for column only
@@ -306,4 +308,4 @@ class CriticalZone(BaseInteractor):
         self.wall_straight = self.coord_input.GetSelectedElement() if not self.coord_input.GetSelectedElement().IsNull() else None
 
         return True
-    
+
